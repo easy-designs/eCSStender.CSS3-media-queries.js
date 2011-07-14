@@ -16,7 +16,7 @@ See the CHANGELOG file for information on what's new.
 
 h2. Caveats
 
-Only `screen` media types are supported. Others, such as `print`, `handheld`, etc. will remain untouched;
+Only @screen@ media types are supported. Others, such as @print@, @handheld@, etc. will remain untouched. Media queries must begin with either @screen@ or @all@ (<code>@media screen and (max-width:960px)</code>).
 
 h2. The distribution
 
