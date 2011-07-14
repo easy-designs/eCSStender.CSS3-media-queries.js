@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>eCSStender CSS3 Module: Media Queries</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="en-us" />
+    <meta name="author" content="" />
+    <meta name="MSSmartTagsPreventParsing" content="true" />
+    <meta name="ROBOTS" content="ALL" />
+    <meta name="Copyright" content="Copyright (c) 2008. All rights reserved." />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta name="Rating" content="General" />
+    <link rel="stylesheet" type="text/css" media="screen" href="test.css" />
+	<link rel="stylesheet" type="text/css" href="test2.css" media="screen and (max-width:960px)">
+	<style type="text/css" media="screen and (orientation:portrait)">
+		#ft {
+			background: #c00;
+		}
+	</style>
+    <script type="text/javascript" src="http://ecsstender.imac/js/ecsstender.js"></script>
+    <script type="text/javascript">
+      // <![CDATA[
+      eCSStender.disableCache();
+      // ]]>
+    </script>
+    <script type="text/javascript" src="../src/eCSStender.CSS3-media-queries.js"></script>
+  </head>
+  <body>
+		<div id="hd">
+			<p class="logo"><a href=".">eCSStender @media queries test</a></p>
+		</div>
+		
+		<div id="bd">
+			<div id="main">
+				<header>
+					<h1>This Is a Sample Headline</h1>
+				</header>
+				
+				<div class="entry-content">
+					<p>If your window is at least 960px wide, you should see a two-column layout. If your browser is less than 960px, you should see a single column layout with a black background and white text. If your screen is portrait orientation, the footer should have a red background.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				</div>
+			</div>
+			
+			<div id="sb">
+				<h2>Subnav</h2>
+				<ul>
+					<li>Link</li>
+					<li>Link</li>
+					<li>Link</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div id="ft">
+			<p>Footer info</p>
+		</div>
+	
+  </body>
+</html>
