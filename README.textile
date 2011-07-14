@@ -14,6 +14,10 @@ h2. What's new in this release?
 
 See the CHANGELOG file for information on what's new.
 
+h2. Caveats
+
+Only `screen` media types are supported. Others, such as `print`, `handheld`, etc. will remain untouched;
+
 h2. The distribution
 
 Besides the eCSStender.CSS3-media-queries.js file in /src (and /min), there's a
