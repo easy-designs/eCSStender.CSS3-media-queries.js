@@ -29,9 +29,13 @@ Note:           If you change or improve on this script, please let us know by
     TRUE        = true,
     FALSE       = false;
 
-    if( typeof WINDOW.matchMedia != UNDEFINED && WINDOW.matchMedia('(min-width:1px)').matches ) {
+    if ( typeof WINDOW.matchMedia != UNDEFINED &&
+         WINDOW.matchMedia('(min-width:1px)').matches )
+    {
       nativeSupport = TRUE;
-    } else {
+    }
+    else
+    {
       // from respond.js <https://github.com/scottjehl/Respond/>
   		var 
   		bool,
@@ -49,46 +53,66 @@ Note:           If you change or improve on this script, please let us know by
   		fakeBody.appendChild( div );
 
   		div.innerHTML = '_<style media="'+q+'"> #mq-test-1 { width: 9px; }</style>';
-  		if( fakeUsed ){
+  		if ( fakeUsed )
+  		{
   			docElem.insertBefore( fakeBody, refNode );
   		}	
   		div.removeChild( div.firstChild );
   		bool = div.offsetWidth == 9;  
-  		if( fakeUsed ){
+  		if ( fakeUsed )
+  		{
   			docElem.removeChild( fakeBody );
   		}	
-  		else{
+  		else
+  		{
   			fakeBody.removeChild( div );
   		}
   		nativeSupport = bool;
     }
-    if(nativeSupport) { return; } // we're done
+    if ( nativeSupport )
+    {
+      return;
+    } // we're done
 
-    var sizeBasedStyles = [];
-    for( var query in e.mediaQueryStyles ) {
-      var 
-      css             = [],
+    var
+    sizeBasedStyles = [],
+    query, css, normalizedQuery, key, rules, prop, sheet, queryMedia;
+    for ( query in e.mediaQueryStyles )
+    {
+      if ( e.isInheritedProperty( e.mediaQueryStyles, query ) ){ continue; }
+      css             = [];
       normalizedQuery = query.toUpperCase();
-      for( var key in e.mediaQueryStyles[ query ]) {
-        var rules = [];
-        for( var prop in e.mediaQueryStyles[ query ][ key ] ) {
-          rules.push(prop + ':' + e.mediaQueryStyles[ query ][ key ][ prop ]);
+      for ( key in e.mediaQueryStyles[ query ] )
+      {
+        if ( e.isInheritedProperty( e.mediaQueryStyles[ query ], key ) ){ continue; }
+        rules = [];
+        for ( prop in e.mediaQueryStyles[ query ][ key ] )
+        {
+          if ( e.isInheritedProperty( e.mediaQueryStyles[ query ][ key ], prop ) ){ continue; }
+          rules.push( prop + ':' + e.mediaQueryStyles[ query ][ key ][ prop ] );
         }
-        css.push(key + '{' + rules.join(';') + '}');
+        css.push( key + '{' + rules.join(';') + '}' );
       }
-      var sheet       = e.embedCSS( css.join(','), query );
+      sheet           = e.embedCSS( css.join(','), query );
       sheet.disabled  = TRUE; // this disables the stylesheet
       sheet.media     = SCREEN; // we have to change this or it won't apply
       // see if the original media type is not all or screen
-      var queryMedia  = query.split(' ');
-      if(queryMedia.length) {
+      queryMedia  = query.split(' ');
+      if ( queryMedia.length )
+      {
         queryMedia    = queryMedia[0].replace(/,$/, '').toLowerCase();
-        if(queryMedia != 'all' && queryMedia != 'screen') {
+        if ( queryMedia != 'all' &&
+             queryMedia != 'screen' )
+        {
           sheet.media = query;
         }
       }
       //  if the media type wasn't changed to just 'screen' or was originally just 'screen', we don't manage them
-      if( sheet.media != query && normalizedQuery.indexOf('WIDTH') > -1 || normalizedQuery.indexOf('HEIGHT') > -1 || normalizedQuery.indexOf('ORIENTATION') > -1 ) {
+      if ( sheet.media != query &&
+           ( normalizedQuery.indexOf('WIDTH') > -1 ||
+             normalizedQuery.indexOf('HEIGHT') > -1 ||
+             normalizedQuery.indexOf('ORIENTATION') > -1 ) )
+      {
         sizeBasedStyles.push({
           'query': query,
           'sheet': sheet
@@ -98,12 +122,12 @@ Note:           If you change or improve on this script, please let us know by
 
     activateSheets  = function() {
       var i = sizeBasedStyles.length;
-      while( i ) {
-        var sbs = sizeBasedStyles[ i - 1 ];
+      while( i-- )
+      {
+        var sbs = sizeBasedStyles[i];
         sbs.sheet.disabled = !e.matchMedia( sbs.query );
-        i--;
       }
-    }
+    };
 
     // for Mozilla/Safari/Opera9
     if ( WINDOW.addEventListener )
